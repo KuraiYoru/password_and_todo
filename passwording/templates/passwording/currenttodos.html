@@ -1,0 +1,52 @@
+{% extends 'passwording/base.html' %}
+{% block content %}
+
+
+
+
+<div class="main">
+<h1>All your todos</h1>
+    <form method="post">
+    {% if error %}
+     {{ error }}
+    {% endif %}
+    {% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="button">Create New</button>
+</form>
+<div class="containertodo">
+    {% for todo in aaa %}
+    {% if todo.important %}
+    <div class="block"><span class="post"><a href="{% url 'viewtodo' todo.id %}"><h2>{{ todo.title }}</h2></a></span>
+        <p><span class="post">{{ todo.memo }}</span></p>
+        <p><span class="post">{{ todo.created }}</span></p>
+    </div>
+    {% else %}
+    <div class="important">
+        <span class="post"><a href="{% url 'viewtodo' todo.id %}"><h2>{{ todo.title|upper }}</h2></a></span>
+        <p><span class="post">{{ todo.memo }}</span></p>
+       <p><span class="post">{{ todo.created }}</span></p>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if aaa.has_previous %}
+            <a href="?page=1">&laquo;</a>
+            <a href="?page={{ aaa.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            {{ aaa.number }} of {{ aaa.paginator.num_pages }}
+        </span>
+
+        {% if aaa.has_next %}
+            <a href="?page={{ aaa.next_page_number }}">next</a>
+            <a href="?page={{ aaa.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+{% endblock %}

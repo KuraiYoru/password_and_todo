@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rhodes Island</title>
+    <link href="{% static 'passwording/base.css' %}" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style media="screen">
+    body {
+      background: url('{% static "passwording/art2.png" %}') no-repeat 20% 20%;
+      -moz-background-size: 100%; /* Firefox 3.6+ */
+      -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+      -o-background-size: 100%; /* Opera 9.6+ */
+      background-size: cover;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+<body>
+    <div class="header">
+      <div class="table">
+        <div class="row">
+          <div class="cell"><strong class='white'><a href="{% url 'password' %}">KuraiYoru</a></strong></div>
+          <div class="cell"><a href="https://github.com/KuraiYoru">GitHub</a></div>
+          <div class="cell"><span class='white'><a href="#">Team</a></span></div>
+          {% if user.is_authenticated %}
+            <div class="left">Logged as {{ user.username }}
+            <form action="{% url 'logoutuser' %}" method="POST" class="logout">{% csrf_token %}<button type="submit">Logout</button></form></div>
+          {% else %}
+            <div class="left"><span><a href="{% url 'signup' %}">SignUp</a></span>
+<span><a href="{% url 'loginuser' %}">Login</a></span></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div></div>
+
+{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'passwording/base.html' %}
+
+{% block content %}
+<div class="main">
+<div class="container">
+{% for contact in page_obj %}
+    <div class="float">
+
+    {# Each "contact" is a Contact model object. #}
+    <strong><span class="title"><a href="{% url 'blog:post_detail' contact.id %}" class="mark">{{ contact.title|upper }}</a></span></strong><br>
+    <span class="title">{{ contact.description|truncatechars:30 }}</span><br>
+    <span class="title">{{ contact.data }}</span>
+
+    </div>
+{% endfor %}
+</div>
+<div class="break"></div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo;</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+
+{% endblock %}

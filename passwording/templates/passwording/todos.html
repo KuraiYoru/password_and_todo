@@ -1,0 +1,14 @@
+{% extends 'passwording/base.html' %}
+{% block content %}
+
+<div class="main">
+<form method="post">
+    {% if error %}
+     {{ error }}
+    {% endif %}
+    {% csrf_token %}
+{{ form.as_p }}
+<button type="submit" class="button">Create</button>
+</form>
+</div>
+{% endblock %}

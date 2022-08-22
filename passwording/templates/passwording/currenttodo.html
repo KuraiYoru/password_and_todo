@@ -1,0 +1,26 @@
+{% extends 'passwording/base.html' %}
+{% block content %}
+<div class="main">
+    {{ todo.title }}
+    {{ form.as_p }}
+    {% if not todo.datecompleted %}
+    <form method="POST">
+        {% csrf_token %}
+        <button class="button">SAVE</button>
+    </form>
+
+        <form method="POST" action="{% url 'complete' todo.id %}">
+         {% csrf_token %}
+        <button class="button">Complete</button>
+    </form>
+    {% endif %}
+            <form method="POST" action="{% url 'delete' todo.id %}">
+         {% csrf_token %}
+        <button class="button">Delete</button>
+    </form>
+
+</div>
+
+
+
+{% endblock %}

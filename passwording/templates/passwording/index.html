@@ -1,0 +1,23 @@
+{% extends 'passwording/base.html' %}
+{% block content %}
+
+<div class="main">
+<h1>Password Generator</h1>
+<form method="post">
+    <h2>{{ error }}</h2>
+    {% csrf_token %}
+    <label><span class="length">Length of your password (from 5 to 80)</span></label>
+    <input id="your_name" type="text" name="password">
+    <button class="button">Create password</button>
+    <br>
+    <input type="checkbox" name="symbols" id="symbols">
+    <label for="symbols">Special symbols</label>
+    <input type="checkbox" name="numbers" id="numbers">
+    <label for="numbers">Numbers</label>
+    <input type="checkbox" name="capital" id="capital">
+    <label for="capital">Capital letters</label>
+</form>
+    <h1>{{ password }}</h1>
+</div>
+
+{% endblock %}

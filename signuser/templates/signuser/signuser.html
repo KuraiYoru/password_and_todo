@@ -1,0 +1,24 @@
+{% extends 'passwording/base.html' %}
+
+{% block content %}
+
+
+
+<div class="main">
+<form method="post">
+    {% if error %}
+     {{ error }}
+    {% endif %}
+    {% csrf_token %}
+<div class="register">
+<h3>Enter your username (Length 5 to 30){{ form.username }}</h3>
+<h3>Enter your password: {{ form.password1 }}</h3>
+<h3>Confirm your password: {{ form.password2 }}</h3>
+<button type="submit" class="button">Sign Up</button>
+    </div>
+</form>
+</div>
+
+
+
+{% endblock %}
